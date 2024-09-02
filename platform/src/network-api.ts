@@ -7,7 +7,7 @@ import { Readable } from 'stream'
 export default class InstagramAPI {
   private proxyConfig: ProxyConfig | null = null
 
-  private agent: HttpsProxyAgent | SocksProxyAgent | null = null
+  private agent:  SocksProxyAgent | null = null
 
   private session: any = null
 
@@ -17,7 +17,7 @@ export default class InstagramAPI {
     if (config.protocol === 'socks4' || config.protocol === 'socks5') {
       this.agent = new SocksProxyAgent(proxyUrl)
     } else {
-      this.agent = new HttpsProxyAgent(proxyUrl)
+      this.agent = null
     }
   }
 

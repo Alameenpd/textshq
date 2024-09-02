@@ -1,9 +1,21 @@
-import { ActivityType, CurrentUser, CustomEmojiMap, FetchInfo, LoginCreds, LoginResult, Message, MessageContent, MessageLink, MessageSendOptions, OnConnStateChangeCallback, OnServerEventCallback, Paginated, PaginationArg, Participant, PlatformAPI, PresenceMap, SearchMessageOptions, Thread, User, ProxyConfig, PlatformConfig } from '@textshq/platform-sdk';
+import { ActivityType, Awaitable, CurrentUser, CustomEmojiMap, FetchInfo, LoginCreds, LoginResult, Message, MessageContent, MessageLink, MessageSendOptions, OnConnStateChangeCallback, OnServerEventCallback, Paginated, PaginationArg, Participant, PlatformAPI, PresenceMap, SearchMessageOptions, Thread, User, ProxyConfig, PlatformConfig, AppState, AssetInfo, Attachment, AttachmentID, GetAssetOptions, MessageID, NotificationsInfo, OverridablePlatformInfo, PaginatedWithCursors, StickerPack, StickerPackID, ThreadFolderName, ThreadID } from '@textshq/platform-sdk';
 import type { Readable } from 'stream';
 export default class Instagram implements PlatformAPI {
     private api;
     private loginEventCallback;
     constructor();
+    getPlatformInfo?: () => Awaitable<Partial<OverridablePlatformInfo>>;
+    searchMessages?: (typed: string, pagination?: PaginationArg, options?: SearchMessageOptions) => Awaitable<PaginatedWithCursors<Message>>;
+    getThreads: (folderName: ThreadFolderName, pagination?: PaginationArg) => Awaitable<PaginatedWithCursors<Thread>>;
+    getThreadParticipants?: (threadID: ThreadID, pagination?: PaginationArg) => Awaitable<PaginatedWithCursors<Participant>>;
+    getStickerPacks?: (pagination?: PaginationArg) => Awaitable<PaginatedWithCursors<StickerPack>>;
+    getStickers?: (stickerPackID: StickerPackID, pagination?: PaginationArg) => Awaitable<PaginatedWithCursors<Attachment>>;
+    markAttachmentPlayed?: (attachmentID: AttachmentID, messageID?: MessageID) => Awaitable<void>;
+    registerForPushNotifications?: (type: keyof NotificationsInfo, token: string) => Awaitable<void>;
+    unregisterForPushNotifications?: (type: keyof NotificationsInfo, token: string) => Awaitable<void>;
+    getAssetInfo?: (fetchOptions?: GetAssetOptions, ...args: string[]) => Awaitable<AssetInfo>;
+    reconnectRealtime?: () => void;
+    onAppStateChange?: (state: AppState) => void;
     init: (session?: any, prefs?: Record<string, any>, config?: PlatformConfig) => Promise<void>;
     dispose: () => Promise<void>;
     getCurrentUser: () => Promise<CurrentUser>;
@@ -16,12 +28,9 @@ export default class Instagram implements PlatformAPI {
     takeoverConflict: () => Promise<void>;
     searchUsers: (typed: string) => Promise<User[]>;
     searchThreads: (typed: string) => Promise<Thread[]>;
-    searchMessages: (typed: string, pagination?: PaginationArg, options?: SearchMessageOptions) => Promise<Paginated<Message>>;
     getPresence: () => Promise<PresenceMap>;
     getCustomEmojis: () => Promise<CustomEmojiMap>;
-    getThreads: (folderName: string, pagination?: PaginationArg) => Promise<Paginated<Thread>>;
     getMessages: (threadID: string, pagination?: PaginationArg) => Promise<Paginated<Message>>;
-    getThreadParticipants: (threadID: string, pagination?: PaginationArg) => Promise<Paginated<Participant>>;
     getThread: (threadID: string) => Promise<Thread>;
     getMessage: (messageID: string) => Promise<Message>;
     getUser: (ids: {

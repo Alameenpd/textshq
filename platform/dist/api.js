@@ -10,6 +10,18 @@ class Instagram {
     constructor() {
         this.api = new network_api_1.default();
     }
+    getPlatformInfo;
+    searchMessages;
+    getThreads;
+    getThreadParticipants;
+    getStickerPacks;
+    getStickers;
+    markAttachmentPlayed;
+    registerForPushNotifications;
+    unregisterForPushNotifications;
+    getAssetInfo;
+    reconnectRealtime;
+    onAppStateChange;
     init = async (session, prefs, config) => {
         if (config?.proxyConfig) {
             this.api.setProxy(config.proxyConfig);
@@ -41,12 +53,9 @@ class Instagram {
     };
     searchUsers = async (typed) => this.api.searchUsers(typed);
     searchThreads = async (typed) => this.api.searchThreads(typed);
-    searchMessages = async (typed, pagination, options) => this.api.searchMessages(typed, pagination, options);
     getPresence = async () => this.api.getPresence();
     getCustomEmojis = async () => this.api.getCustomEmojis();
-    getThreads = async (folderName, pagination) => this.api.getThreads(folderName, pagination);
     getMessages = async (threadID, pagination) => this.api.getMessages(threadID, pagination);
-    getThreadParticipants = async (threadID, pagination) => this.api.getThreadParticipants(threadID, pagination);
     getThread = async (threadID) => this.api.getThread(threadID);
     getMessage = async (messageID) => this.api.getMessage(messageID);
     getUser = async (ids) => this.api.getUser(ids);

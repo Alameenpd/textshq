@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const https_proxy_agent_1 = require("https-proxy-agent");
 const socks_proxy_agent_1 = require("socks-proxy-agent");
 const node_fetch_1 = __importDefault(require("node-fetch"));
 class InstagramAPI {
@@ -17,7 +16,7 @@ class InstagramAPI {
             this.agent = new socks_proxy_agent_1.SocksProxyAgent(proxyUrl);
         }
         else {
-            this.agent = new https_proxy_agent_1.HttpsProxyAgent(proxyUrl);
+            this.agent = null;
         }
     }
     async setSession(session) {
