@@ -1,11 +1,10 @@
-import { AccountInfo, ActivityType, CurrentUser, CustomEmojiMap, FetchInfo, LoginCreds, LoginResult, Message, MessageContent, MessageLink, MessageSendOptions, OnConnStateChangeCallback, OnServerEventCallback, Paginated, PaginationArg, Participant, PlatformAPI, PresenceMap, SearchMessageOptions, Thread, User, ProxyConfig, PlatformConfig } from '@textshq/platform-sdk';
+import { ActivityType, CurrentUser, CustomEmojiMap, FetchInfo, LoginCreds, LoginResult, Message, MessageContent, MessageLink, MessageSendOptions, OnConnStateChangeCallback, OnServerEventCallback, Paginated, PaginationArg, Participant, PlatformAPI, PresenceMap, SearchMessageOptions, Thread, User, ProxyConfig, PlatformConfig } from '@textshq/platform-sdk';
 import type { Readable } from 'stream';
 export default class Instagram implements PlatformAPI {
-    private accountInfo;
     private api;
     private loginEventCallback;
     constructor();
-    init: (session?: any, accountInfo?: AccountInfo, prefs?: Record<string, any>, config?: PlatformConfig) => Promise<void>;
+    init: (session?: any, prefs?: Record<string, any>, config?: PlatformConfig) => Promise<void>;
     dispose: () => Promise<void>;
     getCurrentUser: () => Promise<CurrentUser>;
     login: (creds?: LoginCreds) => Promise<LoginResult>;

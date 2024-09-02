@@ -6,7 +6,9 @@ import { Readable } from 'stream'
 
 export default class InstagramAPI {
   private proxyConfig: ProxyConfig | null = null
+
   private agent: HttpsProxyAgent | SocksProxyAgent | null = null
+
   private session: any = null
 
   setProxy(config: ProxyConfig) {
@@ -114,7 +116,7 @@ export default class InstagramAPI {
     throw new Error('Method not implemented.')
   }
 
-  async getUser(ids: { userID?: string; username?: string; phoneNumber?: string; email?: string }): Promise<User> {
+  async getUser(ids: { userID?: string, username?: string, phoneNumber?: string, email?: string }): Promise<User> {
     // Implement Instagram user retrieval
     throw new Error('Method not implemented.')
   }

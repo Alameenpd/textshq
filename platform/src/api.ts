@@ -1,10 +1,10 @@
-import {ActivityType, Awaitable, CurrentUser, CustomEmojiMap, FetchInfo, LoginCreds, LoginResult, Message, MessageContent, MessageLink, MessageSendOptions, OnConnStateChangeCallback, OnServerEventCallback, Paginated, PaginationArg, Participant, PlatformAPI, PresenceMap, SearchMessageOptions, texts, Thread, User, ProxyConfig, PlatformConfig } from '@textshq/platform-sdk'
+import { ActivityType, Awaitable, CurrentUser, CustomEmojiMap, FetchInfo, LoginCreds, LoginResult, Message, MessageContent, MessageLink, MessageSendOptions, OnConnStateChangeCallback, OnServerEventCallback, Paginated, PaginationArg, Participant, PlatformAPI, PresenceMap, SearchMessageOptions, texts, Thread, User, ProxyConfig, PlatformConfig } from '@textshq/platform-sdk'
 import type { Readable } from 'stream'
 import InstagramAPI from './network-api'
 
 export default class Instagram implements PlatformAPI {
-  private accountInfo: AccountInfo
   private api: InstagramAPI
+
   private loginEventCallback: (data: any) => void
 
   constructor() {
@@ -12,7 +12,6 @@ export default class Instagram implements PlatformAPI {
   }
 
   init = async (session?: any, prefs?: Record<string, any>, config?: PlatformConfig) => {
-    
     if (config?.proxyConfig) {
       this.api.setProxy(config.proxyConfig)
     }
@@ -25,21 +24,15 @@ export default class Instagram implements PlatformAPI {
     await this.api.logout()
   }
 
-  getCurrentUser = async (): Promise<CurrentUser> => {
-    return this.api.getCurrentUser()
-  }
+  getCurrentUser = async (): Promise<CurrentUser> => this.api.getCurrentUser()
 
-  login = async (creds?: LoginCreds): Promise<LoginResult> => {
-    return this.api.login(creds)
-  }
+  login = async (creds?: LoginCreds): Promise<LoginResult> => this.api.login(creds)
 
   logout = async () => {
     await this.api.logout()
   }
 
-  serializeSession = () => {
-    return this.api.serializeSession()
-  }
+  serializeSession = () => this.api.serializeSession()
 
   subscribeToEvents = async (onEvent: OnServerEventCallback) => {
     this.api.subscribeToEvents(onEvent)
@@ -57,53 +50,29 @@ export default class Instagram implements PlatformAPI {
     await this.api.takeoverConflict()
   }
 
-  searchUsers = async (typed: string): Promise<User[]> => {
-    return this.api.searchUsers(typed)
-  }
+  searchUsers = async (typed: string): Promise<User[]> => this.api.searchUsers(typed)
 
-  searchThreads = async (typed: string): Promise<Thread[]> => {
-    return this.api.searchThreads(typed)
-  }
+  searchThreads = async (typed: string): Promise<Thread[]> => this.api.searchThreads(typed)
 
-  searchMessages = async (typed: string, pagination?: PaginationArg, options?: SearchMessageOptions): Promise<Paginated<Message>> => {
-    return this.api.searchMessages(typed, pagination, options)
-  }
+  searchMessages = async (typed: string, pagination?: PaginationArg, options?: SearchMessageOptions): Promise<Paginated<Message>> => this.api.searchMessages(typed, pagination, options)
 
-  getPresence = async (): Promise<PresenceMap> => {
-    return this.api.getPresence()
-  }
+  getPresence = async (): Promise<PresenceMap> => this.api.getPresence()
 
-  getCustomEmojis = async (): Promise<CustomEmojiMap> => {
-    return this.api.getCustomEmojis()
-  }
+  getCustomEmojis = async (): Promise<CustomEmojiMap> => this.api.getCustomEmojis()
 
-  getThreads = async (folderName: string, pagination?: PaginationArg): Promise<Paginated<Thread>> => {
-    return this.api.getThreads(folderName, pagination)
-  }
+  getThreads = async (folderName: string, pagination?: PaginationArg): Promise<Paginated<Thread>> => this.api.getThreads(folderName, pagination)
 
-  getMessages = async (threadID: string, pagination?: PaginationArg): Promise<Paginated<Message>> => {
-    return this.api.getMessages(threadID, pagination)
-  }
+  getMessages = async (threadID: string, pagination?: PaginationArg): Promise<Paginated<Message>> => this.api.getMessages(threadID, pagination)
 
-  getThreadParticipants = async (threadID: string, pagination?: PaginationArg): Promise<Paginated<Participant>> => {
-    return this.api.getThreadParticipants(threadID, pagination)
-  }
+  getThreadParticipants = async (threadID: string, pagination?: PaginationArg): Promise<Paginated<Participant>> => this.api.getThreadParticipants(threadID, pagination)
 
-  getThread = async (threadID: string): Promise<Thread> => {
-    return this.api.getThread(threadID)
-  }
+  getThread = async (threadID: string): Promise<Thread> => this.api.getThread(threadID)
 
-  getMessage = async (messageID: string): Promise<Message> => {
-    return this.api.getMessage(messageID)
-  }
+  getMessage = async (messageID: string): Promise<Message> => this.api.getMessage(messageID)
 
-  getUser = async (ids: { userID?: string; username?: string; phoneNumber?: string; email?: string }): Promise<User> => {
-    return this.api.getUser(ids)
-  }
+  getUser = async (ids: { userID?: string, username?: string, phoneNumber?: string, email?: string }): Promise<User> => this.api.getUser(ids)
 
-  createThread = async (userIDs: string[], title?: string, messageText?: string): Promise<boolean | Thread> => {
-    return this.api.createThread(userIDs, title, messageText)
-  }
+  createThread = async (userIDs: string[], title?: string, messageText?: string): Promise<boolean | Thread> => this.api.createThread(userIDs, title, messageText)
 
   updateThread = async (threadID: string, updates: Partial<Thread>): Promise<void> => {
     await this.api.updateThread(threadID, updates)
@@ -113,17 +82,11 @@ export default class Instagram implements PlatformAPI {
     await this.api.deleteThread(threadID)
   }
 
-  reportThread = async (type: 'spam', threadID: string, firstMessageID?: string): Promise<boolean> => {
-    return this.api.reportThread(type, threadID, firstMessageID)
-  }
+  reportThread = async (type: 'spam', threadID: string, firstMessageID?: string): Promise<boolean> => this.api.reportThread(type, threadID, firstMessageID)
 
-  sendMessage = async (threadID: string, content: MessageContent, options?: MessageSendOptions): Promise<boolean | Message[]> => {
-    return this.api.sendMessage(threadID, content, options)
-  }
+  sendMessage = async (threadID: string, content: MessageContent, options?: MessageSendOptions): Promise<boolean | Message[]> => this.api.sendMessage(threadID, content, options)
 
-  editMessage = async (threadID: string, messageID: string, content: MessageContent, options?: MessageSendOptions): Promise<boolean | Message[]> => {
-    return this.api.editMessage(threadID, messageID, content, options)
-  }
+  editMessage = async (threadID: string, messageID: string, content: MessageContent, options?: MessageSendOptions): Promise<boolean | Message[]> => this.api.editMessage(threadID, messageID, content, options)
 
   forwardMessage = async (threadID: string, messageID: string, threadIDs?: string[], userIDs?: string[]): Promise<void> => {
     await this.api.forwardMessage(threadID, messageID, threadIDs, userIDs)
@@ -149,9 +112,7 @@ export default class Instagram implements PlatformAPI {
     await this.api.removeReaction(threadID, messageID, reactionKey)
   }
 
-  getLinkPreview = async (link: string): Promise<MessageLink> => {
-    return this.api.getLinkPreview(link)
-  }
+  getLinkPreview = async (link: string): Promise<MessageLink> => this.api.getLinkPreview(link)
 
   addParticipant = async (threadID: string, participantID: string): Promise<void> => {
     await this.api.addParticipant(threadID, participantID)
@@ -189,17 +150,11 @@ export default class Instagram implements PlatformAPI {
     await this.api.onThreadSelected(threadID)
   }
 
-  loadDynamicMessage = async (message: Message): Promise<Partial<Message>> => {
-    return this.api.loadDynamicMessage(message)
-  }
+  loadDynamicMessage = async (message: Message): Promise<Partial<Message>> => this.api.loadDynamicMessage(message)
 
-  getAsset = async (_: any, ...args: string[]): Promise<string | Buffer | FetchInfo | Readable> => {
-    return this.api.getAsset(_, ...args)
-  }
+  getAsset = async (_: any, ...args: string[]): Promise<string | Buffer | FetchInfo | Readable> => this.api.getAsset(_, ...args)
 
-  getOriginalObject = async (objName: 'thread' | 'message', objectID: string): Promise<string> => {
-    return this.api.getOriginalObject(objName, objectID)
-  }
+  getOriginalObject = async (objName: 'thread' | 'message', objectID: string): Promise<string> => this.api.getOriginalObject(objName, objectID)
 
   handleDeepLink = (link: string): void => {
     this.api.handleDeepLink(link)

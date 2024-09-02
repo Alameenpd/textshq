@@ -5,14 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const network_api_1 = __importDefault(require("./network-api"));
 class Instagram {
-    accountInfo;
     api;
     loginEventCallback;
     constructor() {
         this.api = new network_api_1.default();
     }
-    init = async (session, accountInfo, prefs, config) => {
-        this.accountInfo = accountInfo;
+    init = async (session, prefs, config) => {
         if (config?.proxyConfig) {
             this.api.setProxy(config.proxyConfig);
         }
@@ -23,18 +21,12 @@ class Instagram {
     dispose = async () => {
         await this.api.logout();
     };
-    getCurrentUser = async () => {
-        return this.api.getCurrentUser();
-    };
-    login = async (creds) => {
-        return this.api.login(creds);
-    };
+    getCurrentUser = async () => this.api.getCurrentUser();
+    login = async (creds) => this.api.login(creds);
     logout = async () => {
         await this.api.logout();
     };
-    serializeSession = () => {
-        return this.api.serializeSession();
-    };
+    serializeSession = () => this.api.serializeSession();
     subscribeToEvents = async (onEvent) => {
         this.api.subscribeToEvents(onEvent);
     };
@@ -47,57 +39,27 @@ class Instagram {
     takeoverConflict = async () => {
         await this.api.takeoverConflict();
     };
-    searchUsers = async (typed) => {
-        return this.api.searchUsers(typed);
-    };
-    searchThreads = async (typed) => {
-        return this.api.searchThreads(typed);
-    };
-    searchMessages = async (typed, pagination, options) => {
-        return this.api.searchMessages(typed, pagination, options);
-    };
-    getPresence = async () => {
-        return this.api.getPresence();
-    };
-    getCustomEmojis = async () => {
-        return this.api.getCustomEmojis();
-    };
-    getThreads = async (folderName, pagination) => {
-        return this.api.getThreads(folderName, pagination);
-    };
-    getMessages = async (threadID, pagination) => {
-        return this.api.getMessages(threadID, pagination);
-    };
-    getThreadParticipants = async (threadID, pagination) => {
-        return this.api.getThreadParticipants(threadID, pagination);
-    };
-    getThread = async (threadID) => {
-        return this.api.getThread(threadID);
-    };
-    getMessage = async (messageID) => {
-        return this.api.getMessage(messageID);
-    };
-    getUser = async (ids) => {
-        return this.api.getUser(ids);
-    };
-    createThread = async (userIDs, title, messageText) => {
-        return this.api.createThread(userIDs, title, messageText);
-    };
+    searchUsers = async (typed) => this.api.searchUsers(typed);
+    searchThreads = async (typed) => this.api.searchThreads(typed);
+    searchMessages = async (typed, pagination, options) => this.api.searchMessages(typed, pagination, options);
+    getPresence = async () => this.api.getPresence();
+    getCustomEmojis = async () => this.api.getCustomEmojis();
+    getThreads = async (folderName, pagination) => this.api.getThreads(folderName, pagination);
+    getMessages = async (threadID, pagination) => this.api.getMessages(threadID, pagination);
+    getThreadParticipants = async (threadID, pagination) => this.api.getThreadParticipants(threadID, pagination);
+    getThread = async (threadID) => this.api.getThread(threadID);
+    getMessage = async (messageID) => this.api.getMessage(messageID);
+    getUser = async (ids) => this.api.getUser(ids);
+    createThread = async (userIDs, title, messageText) => this.api.createThread(userIDs, title, messageText);
     updateThread = async (threadID, updates) => {
         await this.api.updateThread(threadID, updates);
     };
     deleteThread = async (threadID) => {
         await this.api.deleteThread(threadID);
     };
-    reportThread = async (type, threadID, firstMessageID) => {
-        return this.api.reportThread(type, threadID, firstMessageID);
-    };
-    sendMessage = async (threadID, content, options) => {
-        return this.api.sendMessage(threadID, content, options);
-    };
-    editMessage = async (threadID, messageID, content, options) => {
-        return this.api.editMessage(threadID, messageID, content, options);
-    };
+    reportThread = async (type, threadID, firstMessageID) => this.api.reportThread(type, threadID, firstMessageID);
+    sendMessage = async (threadID, content, options) => this.api.sendMessage(threadID, content, options);
+    editMessage = async (threadID, messageID, content, options) => this.api.editMessage(threadID, messageID, content, options);
     forwardMessage = async (threadID, messageID, threadIDs, userIDs) => {
         await this.api.forwardMessage(threadID, messageID, threadIDs, userIDs);
     };
@@ -116,9 +78,7 @@ class Instagram {
     removeReaction = async (threadID, messageID, reactionKey) => {
         await this.api.removeReaction(threadID, messageID, reactionKey);
     };
-    getLinkPreview = async (link) => {
-        return this.api.getLinkPreview(link);
-    };
+    getLinkPreview = async (link) => this.api.getLinkPreview(link);
     addParticipant = async (threadID, participantID) => {
         await this.api.addParticipant(threadID, participantID);
     };
@@ -146,15 +106,9 @@ class Instagram {
     onThreadSelected = async (threadID) => {
         await this.api.onThreadSelected(threadID);
     };
-    loadDynamicMessage = async (message) => {
-        return this.api.loadDynamicMessage(message);
-    };
-    getAsset = async (_, ...args) => {
-        return this.api.getAsset(_, ...args);
-    };
-    getOriginalObject = async (objName, objectID) => {
-        return this.api.getOriginalObject(objName, objectID);
-    };
+    loadDynamicMessage = async (message) => this.api.loadDynamicMessage(message);
+    getAsset = async (_, ...args) => this.api.getAsset(_, ...args);
+    getOriginalObject = async (objName, objectID) => this.api.getOriginalObject(objName, objectID);
     handleDeepLink = (link) => {
         this.api.handleDeepLink(link);
     };
