@@ -1,21 +1,36 @@
 {
-  "name": "@textshq/platform-x",
-  "version": "0.1.0",
-  "main": "dist/index.js",
+  "name": "@textshq/platform-twitter",
+  "version": "0.2.0",
+  "main": "./dist/index.js",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "prepack": "tsc",
     "build": "yarn tsc",
-    "lint": "eslint src --ext ts,tsx,js,jsx --cache"
+    "lint": "yarn eslint src --ext ts,tsx,js,jsx --cache"
   },
   "dependencies": {
-    "@textshq/platform-sdk": "https://github.com/TextsHQ/platform-sdk#0bde861ffc0960c33be30c7c72660cd7341de2c9",
-    "react": "https://github.com/TextsHQ/react-global-shim"
+    "@textshq/platform-sdk": "github:Alameenpd/platform-sdk#main",
+    "eventsource": "^1.0.7",
+    "form-data": "^4.0.0",
+    "he": "^1.2.0",
+    "https-proxy-agent": "^7.0.5",
+    "lodash": "^4.17.20",
+    "mem": "^8.0.0",
+    "react": "^18.3.1",
+    "socks-proxy-agent": "^8.0.4",
+    "tough-cookie": "^4.1.2"
   },
   "devDependencies": {
     "@textshq/eslint-config": "https://github.com/TextsHQ/eslint-config#main",
-    "@types/eslint": "^8.21.3",
-    "@types/node": "^18.15.8",
-    "eslint": "^8.36.0",
+    "@types/eslint": "^8.4.10",
+    "@types/eventsource": "^1.1.5",
+    "@types/he": "^1.1.1",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^16.11.7",
+    "@types/tough-cookie": "^4.0.0",
+    "eslint": "^8.30.0",
     "typescript": "^5.0.2"
   },
   "packageManager": "yarn@3.5.0"

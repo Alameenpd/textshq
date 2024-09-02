@@ -1,4 +1,4 @@
-import { AccountInfo, ActivityType, Awaitable, CurrentUser, CustomEmojiMap, FetchInfo, LoginCreds, LoginResult, Message, MessageContent, MessageLink, MessageSendOptions, OnConnStateChangeCallback, OnServerEventCallback, Paginated, PaginationArg, Participant, PlatformAPI, PresenceMap, SearchMessageOptions, texts, Thread, User, ProxyConfig, PlatformConfig } from '@textshq/platform-sdk'
+import {ActivityType, Awaitable, CurrentUser, CustomEmojiMap, FetchInfo, LoginCreds, LoginResult, Message, MessageContent, MessageLink, MessageSendOptions, OnConnStateChangeCallback, OnServerEventCallback, Paginated, PaginationArg, Participant, PlatformAPI, PresenceMap, SearchMessageOptions, texts, Thread, User, ProxyConfig, PlatformConfig } from '@textshq/platform-sdk'
 import type { Readable } from 'stream'
 import InstagramAPI from './network-api'
 
@@ -11,8 +11,8 @@ export default class Instagram implements PlatformAPI {
     this.api = new InstagramAPI()
   }
 
-  init = async (session?: any, accountInfo?: AccountInfo, prefs?: Record<string, any>, config?: PlatformConfig) => {
-    this.accountInfo = accountInfo
+  init = async (session?: any, prefs?: Record<string, any>, config?: PlatformConfig) => {
+    
     if (config?.proxyConfig) {
       this.api.setProxy(config.proxyConfig)
     }
